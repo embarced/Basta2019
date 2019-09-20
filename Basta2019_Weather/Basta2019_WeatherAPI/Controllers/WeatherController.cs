@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Basta2019_Weather.Common;
 using Microsoft.AspNetCore.Mvc;
@@ -11,6 +10,10 @@ namespace Basta2019_WeatherAPI.Controllers
     [ApiController]
     public class WeatherController : ControllerBase
     {
+        private static string apiKey = "197da5e10fb1ebbb22f1959434f629b8";
+
+        private OpenWeatherMap.OpenWeatherMapClient openWeatherClient = new OpenWeatherMap.OpenWeatherMapClient(apiKey);
+
         // GET api/weather
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
@@ -23,15 +26,26 @@ namespace Basta2019_WeatherAPI.Controllers
         public ActionResult<Weather> Get(string city)
         {
             Console.WriteLine("Call Get; city:" + city);
-            return new Weather() {CountryCode=null, City=city, Temperature=null };
+
+            Weather result = GetWeatherAsync(city).Result;
+
+            return result;
+
+            //return new Weather() {CountryCode=null, City=city, Temperature=null };
         }
 
-        // GET api/weather/DE/Mainz
-        [HttpGet("{countrycode}/{city}")]
-        public ActionResult<Weather> Get(string countrycode, string city)
+        private async Task<Weather> GetWeatherAsync(string city)
         {
-            Console.WriteLine("Call Get; country/city:" + countrycode + "/" + city);
-            return new Weather() { CountryCode = countrycode, City = city, Temperature = null };
+            //TODO Polly - catch (OpenWeatherMapException owme)
+            var currentWeather = await openWeatherClient.CurrentWeather.GetByName(city, OpenWeatherMap.MetricSystem.Metric);
+
+            Console.WriteLine(currentWeather.Weather.Value);
+
+            return new Weather()
+            {
+                City = city, Temperature = new Temperature(currentWeather.Temperature.Value),
+                Value = currentWeather.Weather.Value
+            };
         }
     }
 }

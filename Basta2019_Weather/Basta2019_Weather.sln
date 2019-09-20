@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basta2019_Weather.Client.Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basta2019_Weather.Common", "Basta2019_Weather.Common\Basta2019_Weather.Common.csproj", "{5047A62C-CCF7-416A-A9B0-60A14598D87E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basta2019_Weather.Client.Test", "Basta2019_Weather.Client.Test\Basta2019_Weather.Client.Test.csproj", "{AAB3A1ED-444B-4D99-8EFE-A902973679D8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,5 +33,9 @@ Global
 		{5047A62C-CCF7-416A-A9B0-60A14598D87E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5047A62C-CCF7-416A-A9B0-60A14598D87E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5047A62C-CCF7-416A-A9B0-60A14598D87E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAB3A1ED-444B-4D99-8EFE-A902973679D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAB3A1ED-444B-4D99-8EFE-A902973679D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAB3A1ED-444B-4D99-8EFE-A902973679D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAB3A1ED-444B-4D99-8EFE-A902973679D8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

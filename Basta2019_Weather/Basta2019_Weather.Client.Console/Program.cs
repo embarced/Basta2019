@@ -13,7 +13,9 @@ namespace Basta2019_Weather.Client.Console
 
             using (WeatherClient client = new WeatherClient(uri)) {
                 System.Console.WriteLine(client.GetWeatherAsync("London").Result);
-             }
+                System.Console.WriteLine(client.GetWeatherAsync("Wien").Result);
+                System.Console.WriteLine(client.GetWeatherAsync("Mainz").Result);
+            }
         }
     }
 }

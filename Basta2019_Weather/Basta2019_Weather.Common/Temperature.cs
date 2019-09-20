@@ -4,7 +4,19 @@ namespace Basta2019_Weather.Common
     public class Temperature
     {
         public TemperatureKind TemperatureKind { get; set; }
-        public int Value { get; set; }
+        public double Value { get; set; }
+
+        public Temperature() { }
+
+        public Temperature(double value) : this(value, TemperatureKind.Celsius)
+        {
+        }
+
+        public Temperature(double value, TemperatureKind temperatureKind)
+        {
+            TemperatureKind = temperatureKind;
+            Value = value;
+        }
 
         public override string ToString()
         {
