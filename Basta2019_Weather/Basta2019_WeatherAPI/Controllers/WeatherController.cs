@@ -22,6 +22,7 @@ namespace Basta2019_WeatherAPI.Controllers
         [HttpGet("{city}")]
         public ActionResult<Weather> Get(string city)
         {
+            Console.WriteLine("Call Get; city:" + city);
             return new Weather() {CountryCode=null, City=city, Temperature=null };
         }
 
@@ -29,6 +30,7 @@ namespace Basta2019_WeatherAPI.Controllers
         [HttpGet("{countrycode}/{city}")]
         public ActionResult<Weather> Get(string countrycode, string city)
         {
+            Console.WriteLine("Call Get; country/city:" + countrycode + "/" + city);
             return new Weather() { CountryCode = countrycode, City = city, Temperature = null };
         }
     }

@@ -5,4 +5,8 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Basta2019_Weather.Client.Common\Basta2019_Weather.Client.Common.csproj" />
+    <ProjectReference Include="..\Basta2019_Weather.Common\Basta2019_Weather.Common.csproj" />
+  </ItemGroup>
 </Project>
