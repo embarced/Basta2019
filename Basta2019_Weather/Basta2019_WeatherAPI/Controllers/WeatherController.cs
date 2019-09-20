@@ -43,7 +43,8 @@ namespace Basta2019_WeatherAPI.Controllers
 
             return new Weather()
             {
-                City = city, Temperature = new Temperature(currentWeather.Temperature.Value),
+                City = city,
+                Temperature = new Temperature(currentWeather.Temperature.Value),
                 Value = currentWeather.Weather.Value
             };
         }
