@@ -1,0 +1,35 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basta2019_WeatherAPI", "Basta2019_WeatherAPI\Basta2019_WeatherAPI.csproj", "{0EAFF2E7-7A2E-456F-AFD0-AE9DE2829739}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basta2019_Weather.Client.Common", "Basta2019_Weather.Client.Common\Basta2019_Weather.Client.Common.csproj", "{2BFD4DAF-BB65-4A18-ADA6-63C9A8604A9F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basta2019_Weather.Client.Console", "Basta2019_Weather.Client.Console\Basta2019_Weather.Client.Console.csproj", "{14D27A5E-7334-4DB9-BA80-7BD26B16D54C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basta2019_Weather.Common", "Basta2019_Weather.Common\Basta2019_Weather.Common.csproj", "{5047A62C-CCF7-416A-A9B0-60A14598D87E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0EAFF2E7-7A2E-456F-AFD0-AE9DE2829739}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EAFF2E7-7A2E-456F-AFD0-AE9DE2829739}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EAFF2E7-7A2E-456F-AFD0-AE9DE2829739}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EAFF2E7-7A2E-456F-AFD0-AE9DE2829739}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BFD4DAF-BB65-4A18-ADA6-63C9A8604A9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BFD4DAF-BB65-4A18-ADA6-63C9A8604A9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BFD4DAF-BB65-4A18-ADA6-63C9A8604A9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BFD4DAF-BB65-4A18-ADA6-63C9A8604A9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14D27A5E-7334-4DB9-BA80-7BD26B16D54C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14D27A5E-7334-4DB9-BA80-7BD26B16D54C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14D27A5E-7334-4DB9-BA80-7BD26B16D54C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14D27A5E-7334-4DB9-BA80-7BD26B16D54C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5047A62C-CCF7-416A-A9B0-60A14598D87E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5047A62C-CCF7-416A-A9B0-60A14598D87E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5047A62C-CCF7-416A-A9B0-60A14598D87E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5047A62C-CCF7-416A-A9B0-60A14598D87E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
