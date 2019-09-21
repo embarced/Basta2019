@@ -27,4 +27,7 @@
       <HintPath>..\lib\OpenWeatherMap.dll</HintPath>
     </Reference>
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Controllers\WeatherController %28copy%29.cs" />
+  </ItemGroup>
 </Project>

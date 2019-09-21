@@ -36,11 +36,10 @@ namespace Basta2019_WeatherAPI.Controllers
         {
             Console.WriteLine("Call Get; city:" + city);
 
-            Weather result = GetWeatherAsync(city).Result;
+            //Weather result = GetWeatherAsync(city).Result;
+            Weather result = GetWeatheryWithPolly(city);
 
             return result;
-
-            //return new Weather() {CountryCode=null, City=city, Temperature=null };
         }
 
         private async Task<Weather> GetWeatherAsync(string city)
@@ -50,22 +49,22 @@ namespace Basta2019_WeatherAPI.Controllers
 
             Console.WriteLine(currentWeather.Weather.Value);
 
-            PollyTest(city);
+            GetWeatheryWithPolly(city);
 
-            return GetWeatherFromResponse(city, currentWeather);
+            return GetWeatherFromResponse(currentWeather);
         }
 
-        private Weather GetWeatherFromResponse(string city, OpenWeatherMap.CurrentWeatherResponse currentWeather)
+        private Weather GetWeatherFromResponse(OpenWeatherMap.CurrentWeatherResponse currentWeather)
         {
             return new Weather()
             {
-                City = city,
+                City = currentWeather.City.Name,
                 Temperature = new Temperature(currentWeather.Temperature.Value),
                 Value = currentWeather.Weather.Value
             };
         }
 
-        private void PollyTest(string city)
+        private Weather GetWeatheryWithPolly(string city)
         {
             AsyncCircuitBreakerPolicy breaker = Policy
               .Handle<OpenWeatherMap.OpenWeatherMapException>()
@@ -74,34 +73,35 @@ namespace Basta2019_WeatherAPI.Controllers
                 durationOfBreak: TimeSpan.FromMinutes(1)
               );
 
-            AsyncTimeoutPolicy timeoutPolicy = Policy
-                .TimeoutAsync(new TimeSpan(0,0,0,0,50), TimeoutStrategy.Pessimistic); // Pessimistic strategy as openWeatherClient doesn't support CancellationToken
+            var timeoutPolicy = Policy
+                .TimeoutAsync(new TimeSpan(0,0,2), TimeoutStrategy.Pessimistic); // Pessimistic strategy as openWeatherClient doesn't support CancellationToken
 
             var fallBackPolicy = Policy<OpenWeatherMap.CurrentWeatherResponse>
-                .Handle<Exception>()
-                .FallbackAsync<OpenWeatherMap.CurrentWeatherResponse>((ct) => DoFallbackAction(ct));
+                .Handle<Exception>(IsFallbackPolicyEnabled)
+                .FallbackAsync<OpenWeatherMap.CurrentWeatherResponse>((ct) => DoFallbackAction(ct, city));
 
-            var policyWrap = fallBackPolicy.WrapAsync(timeoutPolicy).WrapAsync(breaker);
+            var simmyPolicy = GetSimmyLatencyPolicy();
 
-            if (true) // wrap also SimmyFaulPolicy
-            {
-                var simmyPolicy = GetSimmyLatencyPolicy();
-                policyWrap = policyWrap.WrapAsync(simmyPolicy);
-            }
+            var policyWrap = fallBackPolicy // fallbackPolicy must be the innermost to work for all cases!!
+                .WrapAsync(breaker)
+                .WrapAsync(timeoutPolicy)                
+                .WrapAsync(simmyPolicy); // simmyPolicy must be the outermost to trigger all internal policies!
 
             var result = policyWrap.ExecuteAsync(async ()
                 => await openWeatherClient.CurrentWeather.GetByName(city, OpenWeatherMap.MetricSystem.Metric)).Result;
+            var weather = GetWeatherFromResponse(result);
 
-            var weather = GetWeatherFromResponse(city, result);
+            return weather;
         }
 
-        private Task<OpenWeatherMap.CurrentWeatherResponse> DoFallbackAction(CancellationToken ct)
+        private Task<OpenWeatherMap.CurrentWeatherResponse> DoFallbackAction(CancellationToken ct, string city)
         {
             // TODO get weather from cache
             OpenWeatherMap.CurrentWeatherResponse response = new OpenWeatherMap.CurrentWeatherResponse()
             {
                 Weather = new OpenWeatherMap.Weather() { Value = "cloudy" },
-                Temperature = new OpenWeatherMap.Temperature() { Value = 11.11, Unit = "celcius"}
+                Temperature = new OpenWeatherMap.Temperature() { Value = 11.11, Unit = "celcius"},
+                City = new OpenWeatherMap.City() { Name = city + " (fallback)" },                
             };
 
             // TODO - bessere Lösung um einen Task zurückzugeben und gleich zu starten?
@@ -114,7 +114,7 @@ namespace Basta2019_WeatherAPI.Controllers
         private AsyncInjectOutcomePolicy<HttpRequestException> GetSimmyFaultPolicy()
         {
             var fault = new HttpRequestException("HTTP Exception");
-            AsyncInjectOutcomePolicy<HttpRequestException> faultPolicy = MonkeyPolicy.InjectFaultAsync(fault, 1, () => isEnabled());
+            AsyncInjectOutcomePolicy<HttpRequestException> faultPolicy = MonkeyPolicy.InjectFaultAsync(fault, 1, () => IsChaosPolicyEnabled());
 
             return faultPolicy;
         }
@@ -123,16 +123,26 @@ namespace Basta2019_WeatherAPI.Controllers
         {
             AsyncInjectLatencyPolicy chaosPolicy = MonkeyPolicy.InjectLatencyAsync(
                 latency: TimeSpan.FromSeconds(5),
-                injectionRate: 0.1,
-                enabled: () => isEnabled()
+                injectionRate: 1, // 100% injectionRate
+                enabled: () => IsChaosPolicyEnabled()
                 );
 
             return chaosPolicy;
         }
 
-        private bool isEnabled()
+        private bool IsFallbackPolicyEnabled(Exception ex)
         {
+            if (ex is OpenWeatherMap.OpenWeatherMapException owme)
+            {
+                if (owme.StatusCode == System.Net.HttpStatusCode.NotFound) // requested city was not found
+                    return false;
+            }
             return true;
+        }
+
+        private bool IsChaosPolicyEnabled()
+        {
+            return false;
         }
     }
 }

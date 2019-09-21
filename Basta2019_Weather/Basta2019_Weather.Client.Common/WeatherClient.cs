@@ -20,19 +20,18 @@ namespace Basta2019_Watcher.Client.Common
         // GET /weather/city
         public async Task<Weather> GetWeatherAsync(string city)
         {
-            var resp2 = await client.GetAsync(city);            
-            string content = await resp2.Content.ReadAsStringAsync();
+            var resp2 = await client.GetAsync(city);
 
-            return GetWeatherFromJson(content);
-        }
+            if (resp2.IsSuccessStatusCode)
+            {
+                string content = await resp2.Content.ReadAsStringAsync();
 
-        // GET /weather/countrycode/city
-        public async Task<Weather> GetWeatherAsync(string countryCode, string city)
-        {
-            var resp2 = await client.GetAsync(countryCode + "/" + city);
-            string content = await resp2.Content.ReadAsStringAsync();
-
-            return GetWeatherFromJson(content);
+                return GetWeatherFromJson(content);
+            }
+            else
+            {
+                throw new InvalidOperationException(string.Format("Invalid Request (Status Code: {0})", resp2.StatusCode)); // TODO add response message to exception
+            }
         }
 
         private Weather GetWeatherFromJson(string json)

@@ -10,7 +10,7 @@ namespace Basta2019_Weather.Client.Test
         string uri = "https://localhost:5001/";
 
         [TestMethod]
-        public void TestConnect()
+        public void TestGetWeatherLondon()
         {
             using (WeatherClient client = new WeatherClient(uri))
             {
