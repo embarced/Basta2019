@@ -1,6 +1,6 @@
 ﻿namespace Basta2019_Weather.Common
 {
-    public class WeatherRepresentation //TODO: 2 representations of representation
+    public class WeatherRepresentation //TODO: 2 different classes for this representation
     {
         public WeatherRepresentationKind WeatherRepresentationKind { get; set; }
 

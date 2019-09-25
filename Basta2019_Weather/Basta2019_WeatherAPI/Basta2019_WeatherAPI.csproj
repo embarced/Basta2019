@@ -17,14 +17,10 @@
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Polly" Version="7.1.1" />
     <PackageReference Include="Polly.Contrib.Simmy" Version="0.2.0" />
+    <PackageReference Include="OpenWeatherMap" Version="1.1.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Basta2019_Weather.Common\Basta2019_Weather.Common.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="OpenWeatherMap">
-      <HintPath>..\lib\OpenWeatherMap.dll</HintPath>
-    </Reference>
   </ItemGroup>
 </Project>

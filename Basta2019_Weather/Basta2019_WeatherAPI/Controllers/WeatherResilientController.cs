@@ -84,7 +84,7 @@ namespace Basta2019_WeatherAPI.Controllers
 
         private Task<OpenWeatherMap.CurrentWeatherResponse> DoFallbackAction(CancellationToken ct, string city)
         {
-            // TODO get weather from cache
+            // TODO get weather from a real cache
             OpenWeatherMap.CurrentWeatherResponse response = new OpenWeatherMap.CurrentWeatherResponse()
             {
                 Weather = new OpenWeatherMap.Weather() { Value = "cloudy" },
@@ -92,7 +92,6 @@ namespace Basta2019_WeatherAPI.Controllers
                 City = new OpenWeatherMap.City() { Name = city + " (fallback)" },
             };
 
-            // TODO - bessere Lösung um einen Task zurückzugeben und gleich zu starten?
             var resultTask = new Task<OpenWeatherMap.CurrentWeatherResponse>(() => response);
             resultTask.Start();
 
