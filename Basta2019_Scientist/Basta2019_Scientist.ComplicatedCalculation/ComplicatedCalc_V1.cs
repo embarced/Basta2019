@@ -16,7 +16,7 @@ namespace Basta2019_Scientist.ComplicatedCalculation
                 int result;
 
                 // Do other complicated stuff
-                Thread.Sleep(20);
+                Thread.Sleep(2);
 
                 int sum1 = context;
                 int sum2 = context;
@@ -31,7 +31,7 @@ namespace Basta2019_Scientist.ComplicatedCalculation
                 int result;
 
                 // Do other complicated stuff
-                Thread.Sleep(30);
+                Thread.Sleep(3);
 
                 int mult1 = context;
                 int mult2 = context;
@@ -46,7 +46,7 @@ namespace Basta2019_Scientist.ComplicatedCalculation
                 int result;
 
                 // Do other complicated stuff
-                Thread.Sleep(40);
+                Thread.Sleep(4);
 
                 int sum1 = context;
                 int sum2;
@@ -61,7 +61,7 @@ namespace Basta2019_Scientist.ComplicatedCalculation
             }
 
             // Do other complicated stuff
-            Thread.Sleep(10);
+            Thread.Sleep(1);
             return context;
         }
     }
