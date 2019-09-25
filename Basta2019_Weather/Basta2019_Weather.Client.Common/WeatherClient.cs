@@ -8,19 +8,33 @@ namespace Basta2019_Watcher.Client.Common
 {
     public class WeatherClient : IDisposable
     {
-        System.Net.Http.HttpClient client;
+        private System.Net.Http.HttpClient client;
+
+        private string apiAdressWeather = "api/weather/";
+        private string apiAdressWeatherResilient = "api/weatherresilient/";
 
         public WeatherClient(string uri)
         {
             client = new System.Net.Http.HttpClient();
-            client.BaseAddress = new Uri(uri + "api/weather/");
+            client.BaseAddress = new Uri(uri);
             client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
         }
 
         // GET /weather/city
         public async Task<Weather> GetWeatherAsync(string city)
         {
-            var resp2 = await client.GetAsync(city);
+            return await GetWeatherInternalAsync(apiAdressWeather, city);
+        }
+
+        // GET /weatherresilient/city
+        public async Task<Weather> GetWeatherResilientAsync(string city)
+        {
+            return await GetWeatherInternalAsync(apiAdressWeatherResilient, city);
+        }
+
+        private async Task<Weather> GetWeatherInternalAsync(string apiAdress, string city)
+        {
+            var resp2 = await client.GetAsync(apiAdress + city);
 
             if (resp2.IsSuccessStatusCode)
             {

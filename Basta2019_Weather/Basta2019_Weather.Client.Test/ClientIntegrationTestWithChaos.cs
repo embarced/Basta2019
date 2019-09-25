@@ -15,14 +15,14 @@ namespace Basta2019_Weather.Client.Test
         [TestInitialize]
         public void Setup()
         {
-            // Enable Polly on target test environment
+            // Enable Polly on target test environment by writing test-file
             File.WriteAllText(Path.Combine(filePathToChaosSettings, SharedData.ChaosEnabledFileName), "chaosTestingEnabled:true");
         }
 
         [TestCleanup]
         public void Teardown()
         {
-            // Disable Polly on target test environment
+            // Disable Polly on target test environment by writing test-file
             File.Delete(Path.Combine(filePathToChaosSettings, SharedData.ChaosEnabledFileName));
         }
 
@@ -32,7 +32,7 @@ namespace Basta2019_Weather.Client.Test
             using (WeatherClient client = new WeatherClient(uri))
             {
                 string city = "London";
-                Weather result = client.GetWeatherAsync(city).Result;
+                Weather result = client.GetWeatherResilientAsync(city).Result;
 
                 StringAssert.Contains(result.City, city);
                 StringAssert.Contains(result.City, "fallback"); // in case of fallback -> is added to city name

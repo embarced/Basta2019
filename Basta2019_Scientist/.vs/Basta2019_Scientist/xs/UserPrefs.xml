@@ -1,11 +1,8 @@
 ﻿<Properties StartupConfiguration="{65385204-2C2F-4ED3-B3C2-7B90DC8B3B80}|Default">
-  <MonoDevelop.Ide.ItemProperties.Basta2019__Scientist.ComplicatedCalculation.v2 FirstBuild="True" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Basta2019_Scientist.ComplicatedCalculation/ComplicatedCalc_V1.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Basta2019_Scientist.Client/MyResultPublisher.cs">
     <Files>
-      <File FileName="Basta2019_Scientist.Client/ComplicatedCalc_V1.cs" Line="2" Column="13" />
-      <File FileName="Basta2019_Scientist.Client/ComplicatedCalc_V2.cs" Line="2" Column="37" />
-      <File FileName="Basta2019_Scientist.Client/MyResultPublisher.cs" Line="7" Column="31" />
-      <File FileName="Basta2019_Scientist.Client/Program.cs" Line="16" Column="34" />
+      <File FileName="Basta2019_Scientist.Client/MyResultPublisher.cs" Line="19" Column="75" />
+      <File FileName="Basta2019_Scientist.Client/Program.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -13,10 +10,9 @@
           <Node name="Basta2019_Scientist" expanded="True">
             <Node name="Basta2019_Scientist.Client" expanded="True">
               <Node name="Dependencies" expanded="True" />
+              <Node name="MyResultPublisher.cs" selected="True" />
             </Node>
-            <Node name="Basta2019_Scientist.ComplicatedCalculation" expanded="True">
-              <Node name="ComplicatedCalc_V1.cs" selected="True" />
-            </Node>
+            <Node name="Basta2019_Scientist.ComplicatedCalculation" expanded="True" />
             <Node name="Basta2019_Scientist.ComplicatedCalculation.v2" expanded="True" />
           </Node>
         </State>
@@ -25,7 +21,6 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.Basta2019__Scientist.Client PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.Basta2019__Scientist.ComplicatedCalculation FirstBuild="True" />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />

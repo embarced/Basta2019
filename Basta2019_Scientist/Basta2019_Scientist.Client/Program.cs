@@ -27,7 +27,7 @@ namespace Basta2019_Scientist.Client
                     experiment.Use(() => new ComplicatedCalc_V1().GetResult(randomInput)); // Old Version
                     experiment.Try(() => new ComplicatedCalc_V2().GetResult(randomInput)); // New Version
                 });
-                Console.WriteLine($"Result: {result}"); // Result is always Old Version
+                //Console.WriteLine($"Result: {result}"); // Result is always Old Version
             }
 
         }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Globalization;
+using System.Linq;
 using System.Threading.Tasks;
 using GitHub;
 
@@ -8,23 +10,18 @@ namespace Basta2019_Scientist.Client
     {
         public Task Publish<T, TClean>(Result<T, TClean> result)
         {
-            Console.WriteLine($"Publishing results for experiment '{result.ExperimentName}'");
-            Console.WriteLine($"Result: {(result.Matched ? "MATCH" : "MISMATCH")}");
-            Console.WriteLine($"Control value: {result.Control.Value}");
-            Console.WriteLine($"Control duration: {result.Control.Duration}");
-            foreach (var observation in result.Candidates)
+            if (result.Candidates.Count > 0)
             {
-                Console.WriteLine($"Candidate name: {observation.Name}");
-                Console.WriteLine($"Candidate value: {observation.Value}");
-                Console.WriteLine($"Candidate duration: {observation.Duration}");
-            }
-
-            if (result.Mismatched)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Experiment Failed");
+                if (result.Mismatched)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;                  
+                }
+                Console.WriteLine(string.Format("Default Result: {0}\t\t\tCandidate Result: {1}", result.Control.Value, result.Candidates.First().Value));
+                Console.WriteLine(string.Format("Default Duration: {0}\tCandidate Duration: {1}", result.Control.Duration, result.Candidates.First().Duration));
                 Console.ForegroundColor = ConsoleColor.Black;
             }
+
+            Console.WriteLine();
 
             return Task.FromResult(0);
         }

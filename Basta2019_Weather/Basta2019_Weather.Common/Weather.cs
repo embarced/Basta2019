@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Basta2019_Weather.Common
 {
@@ -10,9 +11,11 @@ namespace Basta2019_Weather.Common
 
         public string Value { get; set; }
 
+        public List<WeatherRepresentation> WeatherRepresentations { get; set; } // TODO: make immutable... ;)
+
         public override string ToString()
         {
-            return string.Format("{0}; Temperature: {1}", City, Temperature);
+            return string.Format("{0}; Temperature: {1}, Weather: {2}", City, Temperature, Value);
         }
     }
 }

@@ -7,15 +7,21 @@ namespace Basta2019_Weather.Client.Console
     {
         static void Main(string[] args)
         {
-            System.Console.WriteLine("Hello World!");
+            System.Console.WriteLine("Enter city name to retrieve weather [Enter]! (just hit [Enter] to close)");
 
             string uri = "https://localhost:5001/";
 
-            using (WeatherClient client = new WeatherClient(uri)) {
-                //System.Console.WriteLine(client.GetWeatherAsync("London").Result);
-                //System.Console.WriteLine(client.GetWeatherAsync("Wien").Result);
-                //System.Console.WriteLine(client.GetWeatherAsync("Mainz").Result);
-                System.Console.WriteLine(client.GetWeatherAsync("asdfdfasd").Result);
+            string inputCity;
+
+            while (!string.IsNullOrEmpty(inputCity = System.Console.ReadLine()))
+            { 
+                using (WeatherClient client = new WeatherClient(uri))
+                {
+                    System.Console.WriteLine(client.GetWeatherAsync(inputCity).Result);
+
+                    // use resilient version of API
+                    //System.Console.WriteLine(client.GetWeatherResilientAsync(inputCity).Result);
+                }
             }
         }
     }
