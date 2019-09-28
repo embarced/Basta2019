@@ -25,3 +25,11 @@ https://github.com/Polly-Contrib/Simmy
 
 ### Polly & Simmy Project Page
 http://www.thepollyproject.org
+
+## Basta2019_Weather
+### Weather API
+https://openweathermap.org
+
+Die verwendete Weather API stammt von OpenWeatherMap.
+
+Für den Zugriff wird dort ein (gratis) Account benötigt. Sobald mal einen account eingerichtet hat, bekommt man einen ApiKey. Dieser wird in den beiden Controllern benötigt, um über den OpenWeatherMap Client auf die API zuzugreifen!
